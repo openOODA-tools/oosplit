@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=oosplit-bin
+_pkgname=oosplit
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Splits large datasets into fixed-size byte chunks or line-bounded parts with hashes."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/oosplit"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('oosplit')
+conflicts=('oosplit')
+source_x86_64=("${url}/releases/download/v${pkgver}/oosplit-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/oosplit-linux-x86_64" "${pkgdir}/usr/bin/oosplit"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/oosplit-uninstall"
+}
